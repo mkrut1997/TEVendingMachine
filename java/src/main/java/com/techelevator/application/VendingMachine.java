@@ -1,6 +1,7 @@
 package com.techelevator.application;
 
 import com.techelevator.models.Inventory;
+import com.techelevator.models.MachineBank;
 import com.techelevator.ui.UserInput;
 import com.techelevator.ui.UserOutput;
 
@@ -11,6 +12,7 @@ public class VendingMachine
 {
     public void run()
     {
+        MachineBank bank = new MachineBank();
         Inventory inventory = null;
         try{
             inventory = new Inventory("catering.csv");

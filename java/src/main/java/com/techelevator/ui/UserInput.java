@@ -8,7 +8,8 @@ import java.util.Scanner;
  * 
  * Dependencies: None
  */
-public class UserInput
+public class
+UserInput
 {
     private static Scanner scanner = new Scanner(System.in);
 
