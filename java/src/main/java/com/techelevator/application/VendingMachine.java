@@ -1,12 +1,22 @@
 package com.techelevator.application;
 
+import com.techelevator.models.Inventory;
 import com.techelevator.ui.UserInput;
 import com.techelevator.ui.UserOutput;
+
+import java.io.File;
+import java.io.FileNotFoundException;
 
 public class VendingMachine 
 {
     public void run()
     {
+        Inventory inventory = null;
+        try{
+            inventory = new Inventory("catering.csv");
+        }catch(FileNotFoundException e){
+            System.out.println("File does not exist");
+        }
         while(true)
         {
             UserOutput.displayHomeScreen();
