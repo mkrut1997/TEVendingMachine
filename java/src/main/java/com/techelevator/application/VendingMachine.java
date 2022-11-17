@@ -24,6 +24,7 @@ public class VendingMachine
 
             if(choice.equals("display"))
             {
+                UserOutput.displayMessage(inventory.getInventoryList());
                 // display the vending machine slots
             }
             else if(choice.equals("purchase"))

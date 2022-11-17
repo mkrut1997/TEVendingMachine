@@ -1,0 +1,4 @@
+A1,Hubba Bubba,1.50,Gum
+A2,Coke,2.00,Drink
+A3,Nerds,2.50,Candy
+A4,Lays,3.00,Munchy
