@@ -1,5 +1,6 @@
 package com.techelevator.application;
 
+import com.techelevator.models.AuditLog;
 import com.techelevator.models.Inventory;
 import com.techelevator.models.MachineBank;
 import com.techelevator.models.VendingItem;
@@ -16,11 +17,13 @@ public class VendingMachine
     {
         MachineBank bank = new MachineBank();
         Inventory inventory = null;
+
         try{
             inventory = new Inventory("catering.csv");
         }catch(FileNotFoundException e){
             System.out.println("File does not exist");
         }
+        AuditLog auditLog = new AuditLog(bank,inventory);
         while(true)
         {
             UserOutput.displayHomeScreen();
