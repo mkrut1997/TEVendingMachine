@@ -26,7 +26,7 @@ UserInput
         System.out.print("Please select an option: ");
 
         String selectedOption = scanner.nextLine();
-        String option = selectedOption.trim().toLowerCase();
+        String option = selectedOption.trim();
 
         if (option.equals("D"))
         {
