@@ -57,13 +57,13 @@ public class UserInput {
         String option = selectedOption.trim();
 
         if(option.equals("M")){
-            System.out.print("Please enter dollar amount (we take $1, $5, $10, or $20): ");
+            System.out.print("Please enter dollar amount ($1, $5, $10, or $20): ");
             String dollarAmount = scanner.nextLine();
             if(dollarAmount.equals("1") ||dollarAmount.equals("5") ||dollarAmount.equals("10") ||dollarAmount.equals("20")) {
                 return dollarAmount;
             }else{
-                System.out.println("Invalid dollar amount entered\n");
-                return "";
+                System.out.println("\nINVALID DOLLAR AMOUNT ENTERED!");
+                return "0";
             }
         }
         else if(option.equals("S")){

@@ -27,7 +27,7 @@ public class MachineBank {
         restOfChangePennies -= 5*nickels;
         int pennies = restOfChangePennies;
         balance = new BigDecimal("0.00");
-        String result = "Your change is: " + (dollars==0 ? "": dollars + " dollar(s), ") + (quarters==0? "" : quarters + " quarter(s), ") + (dimes==0 ? "" : dimes + " dime(s), ") + (nickels==0 ? "" : nickels + " nickel(s), ") + (pennies==0? "": pennies + " pennies, ");
+        String result = "Your change is: " + (dollars==0 ? "": (dollars==1 ? dollars + " dollar, " : dollars + " dollars, ")) + (quarters==0 ? "": (quarters==1 ? quarters + " quarter, " : quarters + " quarters, ")) + (dimes==0 ? "": (dimes==1 ? dimes + " dime, " : dimes + " dimes, ")) + (nickels==0 ? "": (nickels==1 ? nickels + " nickel, " : nickels + " nickels, ")) + (pennies==0 ? "": (pennies==1 ? pennies + " penny, " : pennies + " pennies, "));
         return result.substring(0,result.length()-2);
     }
 
