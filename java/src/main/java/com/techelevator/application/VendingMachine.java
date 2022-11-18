@@ -2,6 +2,7 @@ package com.techelevator.application;
 
 import com.techelevator.models.Inventory;
 import com.techelevator.models.MachineBank;
+import com.techelevator.models.VendingItem;
 import com.techelevator.ui.UserInput;
 import com.techelevator.ui.UserOutput;
 
@@ -41,28 +42,32 @@ public class VendingMachine
                         UserOutput.displayMessage(inventory.getInventoryList());
                         String itemChoice = UserInput.getItemChoice();
                         if(inventory.getInventory().containsKey(itemChoice)){
-                            if(inventory.getInventory().get(itemChoice).getQuantity()>0){
-                                BigDecimal priceOfItem = bank.calculatePrice(inventory.getInventory().get(itemChoice).getPrice());
+                            VendingItem item = inventory.getInventory().get(itemChoice);
+                            String nameOfItem = item.getName();
+                            int quantity = item.getQuantity();
+                            String itemMessage = item.getMessage();
+                            if(quantity>0){
+                                BigDecimal priceOfItem = bank.calculatePrice(item.getPrice());
                                 if(bank.getBalance().compareTo(priceOfItem) >= 0){
                                     bank.updateSaleCounter();
-                                    UserOutput.displayMessage("Here is your " + inventory.getInventory().get(itemChoice).getName() + "!");
                                     bank.setBalance(bank.getBalance().subtract(priceOfItem));
-                                    UserOutput.displayMessage("Cost: $" + priceOfItem + "\nBalance remaining: $" + bank.getBalance());
-                                    UserOutput.displayMessage(inventory.getInventory().get(itemChoice).getMessage());
-                                    inventory.getInventory().get(itemChoice).decrementQuantity();
-
+                                    UserOutput.displayMessage("Here is your " + nameOfItem + "!\nCost: $" + priceOfItem + "\nBalance remaining: $" + bank.getBalance() +"\n" + itemMessage);
+                                    item.decrementQuantity();
                                 }
                                 else{
-                                    UserOutput.displayMessage("Insufficient balance: price of item is $" + inventory.getInventory().get(itemChoice).getPrice());
+                                    UserOutput.displayMessage("Insufficient balance: price of item is $" + priceOfItem);
                                 }
                             }
                             else{
-                                UserOutput.displayMessage(inventory.getInventory().get(itemChoice).getName() + " IS NO LONGER AVAILABLE");
+                                UserOutput.displayMessage(nameOfItem + " IS NO LONGER AVAILABLE");
                             }
                         }
-                        else{
+                        else {
                             UserOutput.displayMessage("Item choice is invalid");
                         }
+                    }
+                    else{
+                        UserOutput.displayMessage("Item choice is invalid");
                     }
                     UserOutput.displayMessage(bank.displayMoneyProvided());
 
