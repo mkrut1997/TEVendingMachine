@@ -24,6 +24,7 @@ public class VendingMachine
             System.out.println("File does not exist");
         }
         AuditLog auditLog = new AuditLog(bank,inventory);
+
         while(true)
         {
             UserOutput.displayHomeScreen();
@@ -39,10 +40,14 @@ public class VendingMachine
                 while(true) {
                     String purchaseChoice = UserInput.getPurchaseOptions();
                     if(purchaseChoice.equals("0") || purchaseChoice.equals("1") || purchaseChoice.equals("5") || purchaseChoice.equals("10") || purchaseChoice.equals("20")){
+                        auditLog.setBalanceBefore(bank.getBalance());
                         bank.setBalance(bank.getBalance().add( new BigDecimal(purchaseChoice)));
                         UserOutput.displayMessage(bank.displayMoneyProvided());
+                        auditLog.setBalanceAfter(bank.getBalance());
+                        UserOutput.displayMessage(auditLog.writeAuditMoneyFed());
                     }
                     else if(purchaseChoice.equals("select item")){
+                        auditLog.setBalanceBefore(bank.getBalance());
                         UserOutput.displayMessage(inventory.getInventoryList());
                         String itemChoice = UserInput.getItemChoice();
                         if(inventory.getInventory().containsKey(itemChoice)){
@@ -69,9 +74,14 @@ public class VendingMachine
                         else {
                             UserOutput.displayMessage("ITEM CHOICE IS INVALID!");
                         }
+                        auditLog.setBalanceAfter(bank.getBalance());
+                        UserOutput.displayMessage(auditLog.writeAuditMoneyPurchase(itemChoice));
                     }
                     else if(purchaseChoice.equals("finish transaction")){
+                        auditLog.setBalanceBefore(bank.getBalance());
                         UserOutput.displayMessage(bank.getChange());
+                        auditLog.setBalanceAfter(bank.getBalance());
+                        UserOutput.displayMessage(auditLog.writeAuditMoneyChangeGiven());
                         break;
                     }
                     else {
