@@ -6,6 +6,7 @@ import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.TreeMap;
 
 public class Inventory {
     private String path;
@@ -23,7 +24,7 @@ public class Inventory {
     public Map<String, VendingItem> getInventory() {
         return inventory;
     }
-
+//the method below scans our catering file, loops through it, and sends each item to the create inventory method to be loaded
     private Map<String, VendingItem> scanInventory() throws FileNotFoundException{
         File itemsToLoad = new File(path);
         try(Scanner inputFile = new Scanner(itemsToLoad)){
@@ -36,7 +37,7 @@ public class Inventory {
         }
         return inventory;
     }
-
+//method below works with the method above. it basically builds each vending item and adds it to the inventory map
     private void createInventoryItem(String inventoryDescription) {
         String[] itemElementArray = inventoryDescription.split(",");
         String key = itemElementArray[0];
@@ -59,16 +60,13 @@ public class Inventory {
             inventory.put(key, munchyItem);
         }
     }
-
+//this method returns a string of all the available items, their price, and the quantity remaining
     public String getInventoryList() {
         String result = "";
-        for (Map.Entry<String, VendingItem> item : inventory.entrySet()) {
-            if (item.getValue().getQuantity() == 0) {
-                result += "[" + item.getKey() + "] " + item.getValue().getName() + " ($" + item.getValue().getPrice() + "), SOLD OUT!" + "\n";
-            }
-            else {
-                result += "[" + item.getKey() + "] " + item.getValue().getName() + " ($" + item.getValue().getPrice() + "), Remaining: " + item.getValue().getQuantity() + "\n";
-            }
+        //Tree map will sort the inventory Map by key for the user
+        Map<String,VendingItem> sortedMap = new TreeMap<>(inventory);
+        for (Map.Entry<String, VendingItem> item : sortedMap.entrySet()) {
+            result += "[" + item.getKey() + "] " + item.getValue().getName() + " ($" + item.getValue().getPrice() + "), " + (item.getValue().getQuantity() == 0?"SOLD OUT!" : "Remaining: " + item.getValue().getQuantity()) +"\n";
         }
         return result;
     }
