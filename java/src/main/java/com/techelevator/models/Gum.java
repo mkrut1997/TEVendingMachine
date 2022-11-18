@@ -8,8 +8,8 @@ public class Gum extends VendingItem{
     }
 
     @Override
-    public void getMessage() {
-        System.out.println("Chewy, Chewy, Lots O Bubbles!");
+    public String getMessage() {
+        return "Chewy, Chewy, Lots O Bubbles!";
     }
 
 

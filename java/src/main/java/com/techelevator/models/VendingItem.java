@@ -12,7 +12,7 @@ public abstract class VendingItem {
         this.price = price;
     }
 
-    public abstract void getMessage();
+    public abstract String getMessage();
 
     public String getName() {
         return name;
@@ -29,4 +29,9 @@ public abstract class VendingItem {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
+
+    public void decrementQuantity(){
+        quantity--;
+    }
+
 }

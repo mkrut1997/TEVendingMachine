@@ -1,5 +1,7 @@
 package com.techelevator.ui;
 
+import com.techelevator.models.MachineBank;
+
 import java.math.BigDecimal;
 import java.util.Scanner;
 
@@ -42,6 +44,46 @@ public class UserInput {
             return "";
         }
 
+    }
+
+    public static String getPurchaseOptions(){
+        System.out.println("M) Feed Money");
+        System.out.println("S) Select Item");
+        System.out.println("F) Finish Transaction");
+        System.out.print("\nPlease select an option: ");
+
+
+        String selectedOption = scanner.nextLine();
+        String option = selectedOption.trim();
+
+        if(option.equals("M")){
+            System.out.print("Please enter dollar amount (we take $1, $5, $10, or $20): ");
+            String dollarAmount = scanner.nextLine();
+            if(dollarAmount.equals("1") ||dollarAmount.equals("5") ||dollarAmount.equals("10") ||dollarAmount.equals("20")) {
+                return dollarAmount;
+            }else{
+                System.out.println("Invalid dollar amount entered\n");
+                return "";
+            }
+        }
+        else if(option.equals("S")){
+            System.out.print("");
+            return "select item";
+        }
+        else if(option.equals("F")){
+
+            return "finish transaction";
+
+        }
+        else{
+            return "";
+        }
+    }
+
+    public static String getItemChoice(){
+        System.out.print("Please enter the key for your item: ");
+        String itemKey = scanner.nextLine();
+        return itemKey;
     }
 
     

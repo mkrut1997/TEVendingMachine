@@ -3,7 +3,8 @@ package com.techelevator.models;
 import java.math.BigDecimal;
 
 public class MachineBank {
-    BigDecimal balance = new BigDecimal("0.00");
+    private BigDecimal balance = new BigDecimal("0.00");
+    private int saleCounter = 0;
 
     public BigDecimal getBalance() {
         return balance;
@@ -30,11 +31,30 @@ public class MachineBank {
         return result.substring(0,result.length()-2);
     }
 
-    public void displayMoneyProvided() {
+    public String displayMoneyProvided() {
+        return "Current Money Provided: $" + balance;
 
     }
 
     public void recordTransactions() {
 
     }
+
+    public void updateSaleCounter() {
+        saleCounter++;
+    }
+
+    public BigDecimal calculatePrice(BigDecimal price){
+        BigDecimal salePrice = price.subtract(new BigDecimal("1.00"));
+        if(saleCounter%2==0){
+            return price;
+        }else{
+            if(price.compareTo(new BigDecimal("1.00")) < 0){
+                return new BigDecimal("0.00");
+            }
+            return salePrice;
+        }
+
+    }
+
 }

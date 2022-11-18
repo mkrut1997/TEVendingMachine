@@ -10,7 +10,7 @@ public class Munchy extends VendingItem{
 
 
     @Override
-    public void getMessage() {
-        System.out.println("Munchy, Munchy, so Good!");
+    public String getMessage() {
+        return "Munchy, Munchy, so Good!";
     }
 }

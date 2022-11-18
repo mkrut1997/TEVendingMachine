@@ -8,8 +8,8 @@ public class Drink extends VendingItem{
     }
 
     @Override
-    public void getMessage() {
-        System.out.println("Drinky, Drinky, Slurp Slurp!");
+    public String getMessage() {
+        return "Drinky, Drinky, Slurp Slurp!";
     }
 
 
