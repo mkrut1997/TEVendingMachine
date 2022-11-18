@@ -35,8 +35,9 @@ public class VendingMachine
             {
                 while(true) {
                     String purchaseChoice = UserInput.getPurchaseOptions();
-                    if(purchaseChoice.equals("1") ||purchaseChoice.equals("5") ||purchaseChoice.equals("10") ||purchaseChoice.equals("20")){
+                    if(purchaseChoice.equals("0") || purchaseChoice.equals("1") || purchaseChoice.equals("5") || purchaseChoice.equals("10") || purchaseChoice.equals("20")){
                         bank.setBalance(bank.getBalance().add( new BigDecimal(purchaseChoice)));
+                        UserOutput.displayMessage(bank.displayMoneyProvided());
                     }
                     else if(purchaseChoice.equals("select item")){
                         UserOutput.displayMessage(inventory.getInventoryList());
@@ -55,7 +56,7 @@ public class VendingMachine
                                     item.decrementQuantity();
                                 }
                                 else{
-                                    UserOutput.displayMessage("Insufficient balance: price of item is $" + priceOfItem);
+                                    UserOutput.displayMessage("INSUFFICIENT BALANCE: price of item is $" + priceOfItem + "!");
                                 }
                             }
                             else{
@@ -63,14 +64,16 @@ public class VendingMachine
                             }
                         }
                         else {
-                            UserOutput.displayMessage("Item choice is invalid");
+                            UserOutput.displayMessage("ITEM CHOICE IS INVALID!");
                         }
                     }
-                    else{
-                        UserOutput.displayMessage("Item choice is invalid");
+                    else if(purchaseChoice.equals("finish transaction")){
+                        UserOutput.displayMessage(bank.getChange());
+                        break;
                     }
-                    UserOutput.displayMessage(bank.displayMoneyProvided());
-
+                    else {
+                        UserOutput.displayMessage("UNKNOWN ACTION: PLEASE ENTER A VALID MENU OPTION!");
+                    }
                 }
             }
             else if(choice.equals("exit"))
