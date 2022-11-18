@@ -8,13 +8,10 @@ import java.util.Scanner;
  * 
  * Dependencies: None
  */
-public class
-UserInput
-{
+public class UserInput {
     private static Scanner scanner = new Scanner(System.in);
 
-    public static String getHomeScreenOption()
-    {
+    public static String getHomeScreenOption() {
         System.out.println("What would you like to do?");
         System.out.println();
 
@@ -26,7 +23,7 @@ UserInput
         System.out.print("Please select an option: ");
 
         String selectedOption = scanner.nextLine();
-        String option = selectedOption.trim().toLowerCase();
+        String option = selectedOption.trim();
 
         if (option.equals("D"))
         {
