@@ -7,7 +7,7 @@ import com.techelevator.models.VendingItem;
 import com.techelevator.ui.UserInput;
 import com.techelevator.ui.UserOutput;
 
-import java.io.File;
+
 import java.io.FileNotFoundException;
 import java.math.BigDecimal;
 
@@ -19,11 +19,12 @@ public class VendingMachine
         Inventory inventory = null;
 
         try{
-            inventory = new Inventory("catering.csv");
+            inventory = new Inventory("catering1.csv");
         }catch(FileNotFoundException e){
             System.out.println("File does not exist");
         }
-        AuditLog auditLog = new AuditLog(bank,inventory);
+        AuditLog auditLog = new AuditLog(inventory);
+
         while(true)
         {
             UserOutput.displayHomeScreen();
@@ -39,10 +40,14 @@ public class VendingMachine
                 while(true) {
                     String purchaseChoice = UserInput.getPurchaseOptions();
                     if(purchaseChoice.equals("0") || purchaseChoice.equals("1") || purchaseChoice.equals("5") || purchaseChoice.equals("10") || purchaseChoice.equals("20")){
+                        auditLog.setBalanceBefore(bank.getBalance());
                         bank.setBalance(bank.getBalance().add( new BigDecimal(purchaseChoice)));
                         UserOutput.displayMessage(bank.displayMoneyProvided());
+                        auditLog.setBalanceAfter(bank.getBalance());
+                        auditLog.writeAuditMoneyFed();
                     }
                     else if(purchaseChoice.equals("select item")){
+                        auditLog.setBalanceBefore(bank.getBalance());
                         UserOutput.displayMessage(inventory.getInventoryList());
                         String itemChoice = UserInput.getItemChoice();
                         if(inventory.getInventory().containsKey(itemChoice)){
@@ -69,9 +74,14 @@ public class VendingMachine
                         else {
                             UserOutput.displayMessage("ITEM CHOICE IS INVALID!");
                         }
+                        auditLog.setBalanceAfter(bank.getBalance());
+                        auditLog.writeAuditMoneyPurchase(itemChoice);
                     }
                     else if(purchaseChoice.equals("finish transaction")){
+                        auditLog.setBalanceBefore(bank.getBalance());
                         UserOutput.displayMessage(bank.getChange());
+                        auditLog.setBalanceAfter(bank.getBalance());
+                        auditLog.writeAuditMoneyChangeGiven();
                         break;
                     }
                     else {
@@ -81,6 +91,7 @@ public class VendingMachine
             }
             else if(choice.equals("exit"))
             {
+                auditLog.writeAudit();
                 // good bye
                 break;
             }

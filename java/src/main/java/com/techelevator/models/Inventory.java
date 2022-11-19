@@ -17,15 +17,11 @@ public class Inventory {
         inventory = this.scanInventory();
     }
 
-    public String getPath() {
-        return path;
-    }
-
     public Map<String, VendingItem> getInventory() {
         return inventory;
     }
 //the method below scans our catering file, loops through it, and sends each item to the create inventory method to be loaded
-    private Map<String, VendingItem> scanInventory() throws FileNotFoundException{
+    private Map<String, VendingItem> scanInventory() {
         File itemsToLoad = new File(path);
         try(Scanner inputFile = new Scanner(itemsToLoad)){
             while(inputFile.hasNextLine()){

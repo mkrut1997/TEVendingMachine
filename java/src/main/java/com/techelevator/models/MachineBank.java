@@ -36,10 +36,6 @@ public class MachineBank {
 
     }
 
-    public void recordTransactions() {
-
-    }
-
     public void updateSaleCounter() {
         saleCounter++;
     }
