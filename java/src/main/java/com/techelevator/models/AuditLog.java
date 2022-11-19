@@ -24,7 +24,7 @@ public class AuditLog {
         return timeNow + " MONEY FED:            $" + balanceBefore + "   $" + balanceAfter;
     }
 
-   
+
 
 
 }
